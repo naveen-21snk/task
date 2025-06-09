@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    form {
+      background: #fcb1b1;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(170, 218, 58, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #922d2d;
+      border-radius: 4px;
+    }
+    .gender {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .gender input {
+      width: auto;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background: #683b69f1;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #458ea0;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <form id="registrationForm">
+    <h2>Student Registration</h2>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" required>
+
+    <label>Gender:</label>
+    <div class="gender">
+      <label><input type="radio" name="gender" value="Male" required> Male</label>
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+      
+    </div>
+
+    <label for="course">Course:</label>
+    <select id="course" required>
+      <option value="">Select Course</option>
+      <option value="BCA">BCA</option>
+      <option value="B.Sc.it">B.SC.CT</option>
+      <option value="B.Com">B.COM</option>
+      <option value="BA">BA</option>
+    </select>
+
+    <label for="address">Address:</label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <button type="submit">Register</button>
+    <p class="error" id="errorMsg"></p>
+  </form>
+
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const dob = document.getElementById('dob').value;
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const course = document.getElementById('course').value;
+      const address = document.getElementById('address').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (!firstName || !lastName || !email || !dob || !gender || !course || !address) {
+        errorMsg.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      // Basic email validation
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        errorMsg.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      errorMsg.textContent = "";
+      alert("Registration successful!");
+      this.reset();
+    });
+  </script>
+</body>
+</html>
